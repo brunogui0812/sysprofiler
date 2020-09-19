@@ -53,10 +53,24 @@ type MemoryStruct struct {
 	} `json:"_items"`
 }
 
+//OSStruct Operating system overview data
+type OSStruct struct {
+	BootMode        string `json:"boot_mode"`
+	BootVolume      string `json:"boot_volume"`
+	KernelVersion   string `json:"kernel_version"`
+	HostName        string `json:"local_host_name"`
+	Version         string `json:"os_version"`
+	SecureVM        string `json:"secure_vm"`
+	SystemIntegrity string `json:"system_integrity"`
+	Uptime          string `json:"uptime"`
+	Username        string `json:"user_name"`
+}
+
 //MainStruct data about the whole system
 type MainStruct struct {
 	Hardware []HardwareStruct `json:"SPHardwareDataType"`
 	Displays []DisplaysStruct `json:"SPDisplaysDataType"`
 	Audio    []AudioStruct    `json:"SPAudioDataType"`
 	Memory   []MemoryStruct   `json:"SPMemoryDataType"`
+	OS       []OSStruct       `json:"SPSoftwareDataType"`
 }
