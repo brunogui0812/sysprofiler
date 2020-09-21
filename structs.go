@@ -66,11 +66,32 @@ type OSStruct struct {
 	Username        string `json:"user_name"`
 }
 
+//ApplicationsStruct infor about installed Apps
+type ApplicationsStruct struct {
+	Name         string   `json:"_name"`
+	ArchKind     string   `json:"arch_kind"`
+	LastModified string   `json:"lastModified"`
+	ObtainedFrom string   `json:"obtained_from"`
+	Path         string   `json:"path"`
+	Version      string   `json:"version"`
+	SignedBy     []string `json:"signed_by"`
+}
+
+//UpdateStruct Software Update list
+type UpdateStruct struct {
+	Title       string `json:"title"`
+	Version     string `json:"version"`
+	Size        string `json:"size"`
+	Recommended bool   `json:"recommended"`
+	Action      string `json:"action"`
+}
+
 //MainStruct data about the whole system
 type MainStruct struct {
-	Hardware []HardwareStruct `json:"SPHardwareDataType"`
-	Displays []DisplaysStruct `json:"SPDisplaysDataType"`
-	Audio    []AudioStruct    `json:"SPAudioDataType"`
-	Memory   []MemoryStruct   `json:"SPMemoryDataType"`
-	OS       []OSStruct       `json:"SPSoftwareDataType"`
+	Hardware     []HardwareStruct     `json:"SPHardwareDataType"`
+	Displays     []DisplaysStruct     `json:"SPDisplaysDataType"`
+	Audio        []AudioStruct        `json:"SPAudioDataType"`
+	Memory       []MemoryStruct       `json:"SPMemoryDataType"`
+	OS           []OSStruct           `json:"SPSoftwareDataType"`
+	Applications []ApplicationsStruct `json:"SPApplicationsDataType"`
 }
