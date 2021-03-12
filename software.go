@@ -19,45 +19,51 @@ const (
 )
 
 //OS get operating system overview data
-func OS() (OSStruct, error) {
+func OS() ([]OSStruct, error) {
 	var data []MainStruct
-	var osData OSStruct
+	var osData []OSStruct
 	var err error
 	if data, err = Exec(OSDT); err != nil {
-		return OSStruct{}, err
+		return nil, err
 	}
 
-	for _, item := range data {
-		if item.DataType == OSDT {
-			if err := mapstructure.Decode(item.Items[0], &osData); err != nil {
-				return OSStruct{}, err
+	for _, dataItem := range data {
+		if dataItem.DataType == OSDT {
+			for _, item := range dataItem.Items {
+				var decoded OSStruct
+				if err := mapstructure.Decode(item, &decoded); err != nil {
+					return nil, err
+				}
+				osData = append(osData, decoded)
 			}
-			return osData, nil
 		}
 	}
 
-	return OSStruct{}, nil
+	return osData, nil
 }
 
 //Applications get installed apps on the system
-func Applications() (ApplicationsStruct, error) {
+func Applications() ([]ApplicationsStruct, error) {
 	var data []MainStruct
-	var appData ApplicationsStruct
+	var appData []ApplicationsStruct
 	var err error
 	if data, err = Exec(ApplicationsDT); err != nil {
-		return ApplicationsStruct{}, err
+		return nil, err
 	}
 
-	for _, item := range data {
-		if item.DataType == ApplicationsDT {
-			if err := mapstructure.Decode(item.Items[0], &appData); err != nil {
-				return ApplicationsStruct{}, err
+	for _, dataItem := range data {
+		if dataItem.DataType == ApplicationsDT {
+			for _, item := range dataItem.Items {
+				var decoded ApplicationsStruct
+				if err := mapstructure.Decode(item, &decoded); err != nil {
+					return nil, err
+				}
+				appData = append(appData, decoded)
 			}
-			return appData, nil
 		}
 	}
 
-	return ApplicationsStruct{}, nil
+	return appData, nil
 }
 
 //Updates get software updates available

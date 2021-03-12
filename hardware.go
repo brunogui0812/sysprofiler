@@ -16,84 +16,96 @@ const (
 )
 
 //Hardware get hardware overview data
-func Hardware() (HardwareStruct, error) {
+func Hardware() ([]HardwareStruct, error) {
 	var data []MainStruct
-	var hardwareData HardwareStruct
+	var hardwareData []HardwareStruct
 	var err error
 	if data, err = Exec(HardwareDT); err != nil {
-		return HardwareStruct{}, err
+		return nil, err
 	}
 
-	for _, item := range data {
-		if item.DataType == HardwareDT {
-			if err := mapstructure.Decode(item.Items[0], &hardwareData); err != nil {
-				return HardwareStruct{}, err
+	for _, dataItem := range data {
+		if dataItem.DataType == HardwareDT {
+			for _, item := range dataItem.Items {
+				var decoded HardwareStruct
+				if err := mapstructure.Decode(item, &decoded); err != nil {
+					return nil, err
+				}
+				hardwareData = append(hardwareData, decoded)
 			}
-			return hardwareData, nil
 		}
 	}
 
-	return HardwareStruct{}, nil
+	return hardwareData, nil
 }
 
 //Memory get information about system memory
-func Memory() (MemoryStruct, error) {
+func Memory() ([]MemoryStruct, error) {
 	var data []MainStruct
-	var memoryData MemoryStruct
+	var memoryData []MemoryStruct
 	var err error
 	if data, err = Exec(MemoryDT); err != nil {
-		return MemoryStruct{}, err
+		return nil, err
 	}
-	for _, item := range data {
-		if item.DataType == MemoryDT {
-			if err := mapstructure.Decode(item.Items[0], &memoryData); err != nil {
-				return MemoryStruct{}, err
+	for _, dataItem := range data {
+		if dataItem.DataType == MemoryDT {
+			for _, item := range dataItem.Items {
+				var decoded MemoryStruct
+				if err := mapstructure.Decode(item, &decoded); err != nil {
+					return nil, err
+				}
+				memoryData = append(memoryData, decoded)
 			}
-			return memoryData, nil
 		}
 	}
 
-	return MemoryStruct{}, nil
+	return memoryData, nil
 }
 
 //Displays get information about system displays
-func Displays() (DisplaysStruct, error) {
+func Displays() ([]DisplaysStruct, error) {
 	var data []MainStruct
-	var displayData DisplaysStruct
+	var displayData []DisplaysStruct
 	var err error
 	if data, err = Exec(DisplaysDT); err != nil {
-		return DisplaysStruct{}, err
+		return nil, err
 	}
 
-	for _, item := range data {
-		if item.DataType == DisplaysDT {
-			if err := mapstructure.Decode(item.Items[0], &displayData); err != nil {
-				return DisplaysStruct{}, err
+	for _, dataItem := range data {
+		if dataItem.DataType == DisplaysDT {
+			for _, item := range dataItem.Items {
+				var decoded DisplaysStruct
+				if err := mapstructure.Decode(item, &decoded); err != nil {
+					return nil, err
+				}
+				displayData = append(displayData, decoded)
 			}
-			return displayData, nil
 		}
 	}
 
-	return DisplaysStruct{}, nil
+	return displayData, nil
 }
 
 //Audio get information about system audio devices
-func Audio() (AudioStruct, error) {
+func Audio() ([]AudioStruct, error) {
 	var data []MainStruct
-	var audioData AudioStruct
+	var audioData []AudioStruct
 	var err error
 	if data, err = Exec(AudioDT); err != nil {
-		return AudioStruct{}, err
+		return nil, err
 	}
 
-	for _, item := range data {
-		if item.DataType == AudioDT {
-			if err := mapstructure.Decode(item.Items[0], &audioData); err != nil {
-				return AudioStruct{}, err
+	for _, dataItem := range data {
+		if dataItem.DataType == AudioDT {
+			for _, item := range dataItem.Items {
+				var decoded AudioStruct
+				if err := mapstructure.Decode(item, &decoded); err != nil {
+					return nil, err
+				}
+				audioData = append(audioData, decoded)
 			}
-			return audioData, nil
 		}
 	}
 
-	return AudioStruct{}, nil
+	return audioData, nil
 }

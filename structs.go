@@ -1,5 +1,7 @@
 package sysprofiler
 
+import "time"
+
 //HardwareStruct hardware overview
 type HardwareStruct struct {
 	BootRomVersion string `mapstructure:"boot_rom_version"`
@@ -68,13 +70,13 @@ type OSStruct struct {
 
 //ApplicationsStruct infor about installed Apps
 type ApplicationsStruct struct {
-	Name         string   `mapstructure:"_name"`
-	ArchKind     string   `mapstructure:"arch_kind"`
-	LastModified string   `mapstructure:"lastModified"`
-	ObtainedFrom string   `mapstructure:"obtained_from"`
-	Path         string   `mapstructure:"path"`
-	Version      string   `mapstructure:"version"`
-	SignedBy     []string `mapstructure:"signed_by"`
+	Name         string    `mapstructure:"_name"`
+	ArchKind     string    `mapstructure:"arch_kind"`
+	LastModified time.Time `mapstructure:"lastModified"`
+	ObtainedFrom string    `mapstructure:"obtained_from"`
+	Path         string    `mapstructure:"path"`
+	Version      string    `mapstructure:"version"`
+	SignedBy     []string  `mapstructure:"signed_by"`
 }
 
 //UpdateStruct Software Update list
