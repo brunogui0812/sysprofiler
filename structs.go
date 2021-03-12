@@ -2,79 +2,79 @@ package sysprofiler
 
 //HardwareStruct hardware overview
 type HardwareStruct struct {
-	BootRomVersion string `json:"boot_rom_version"`
-	CPUType        string `json:"cpu_type"`
-	CPUSpeed       string `json:"current_processor_speed"`
-	CPUCores       int    `json:"number_processors"`
-	CPUNumber      int    `json:"packages"`
-	L2CacheCore    string `json:"l2_cache_core"`
-	L3Cache        string `json:"l3_cache"`
-	MachineModel   string `json:"machine_model"`
-	MachineName    string `json:"machine_name"`
-	PhysicalMemory string `json:"physical_memory"`
-	PlatformUUID   string `json:"platform_UUID"`
-	Serial         string `json:"serial_number"`
+	BootRomVersion string `mapstructure:"boot_rom_version"`
+	CPUType        string `mapstructure:"cpu_type"`
+	CPUSpeed       string `mapstructure:"current_processor_speed"`
+	CPUCores       int    `mapstructure:"number_processors"`
+	CPUNumber      int    `mapstructure:"packages"`
+	L2CacheCore    string `mapstructure:"l2_cache_core"`
+	L3Cache        string `mapstructure:"l3_cache"`
+	MachineModel   string `mapstructure:"machine_model"`
+	MachineName    string `mapstructure:"machine_name"`
+	PhysicalMemory string `mapstructure:"physical_memory"`
+	PlatformUUID   string `mapstructure:"platform_UUID"`
+	Serial         string `mapstructure:"serial_number"`
 }
 
 //MonitorsStruct data about system monitors
 type MonitorsStruct struct {
-	Name         string `json:"_name"`
-	Resolution   string `json:"spdisplays_resolution"`
-	SerialNumber string `json:"spdisplays_display-serial-number"`
+	Name         string `mapstructure:"_name"`
+	Resolution   string `mapstructure:"spdisplays_resolution"`
+	SerialNumber string `mapstructure:"spdisplays_display-serial-number"`
 }
 
 //DisplaysStruct data about system displays
 type DisplaysStruct struct {
-	Model    string           `json:"sppci_model"`
-	Vendor   string           `json:"spdisplays_vendor"`
-	VRAM     string           `json:"_spdisplays_vram"`
-	Monitors []MonitorsStruct `json:"spdisplays_ndrvs"`
+	Model    string           `mapstructure:"sppci_model"`
+	Vendor   string           `mapstructure:"spdisplays_vendor"`
+	VRAM     string           `mapstructure:"_spdisplays_vram"`
+	Monitors []MonitorsStruct `mapstructure:"spdisplays_ndrvs"`
 }
 
 //AudioStruct data about system audio devices
 type AudioStruct struct {
 	Items []struct {
-		Name         string `json:"_name"`
-		OutputDevice int    `json:"coreaudio_device_output"`
-	} `json:"_items"`
+		Name         string `mapstructure:"_name"`
+		OutputDevice int    `mapstructure:"coreaudio_device_output"`
+	} `mapstructure:"_items"`
 }
 
 //MemoryStruct data about system memory
 type MemoryStruct struct {
 	Items []struct {
-		Name         string `json:"_name"`
-		Manufacturer string `json:"dimm_manufacturer"`
-		PartNumber   string `json:"dimm_part_number"`
-		SerialNumber string `json:"dimm_serial_number"`
-		Size         string `json:"dimm_size"`
-		Speed        string `json:"dimm_speed"`
-		Status       string `json:"dimm_status"`
-		Type         string `json:"dimm_type"`
-	} `json:"_items"`
+		Name         string `mapstructure:"_name"`
+		Manufacturer string `mapstructure:"dimm_manufacturer"`
+		PartNumber   string `mapstructure:"dimm_part_number"`
+		SerialNumber string `mapstructure:"dimm_serial_number"`
+		Size         string `mapstructure:"dimm_size"`
+		Speed        string `mapstructure:"dimm_speed"`
+		Status       string `mapstructure:"dimm_status"`
+		Type         string `mapstructure:"dimm_type"`
+	} `mapstructure:"_items"`
 }
 
 //OSStruct Operating system overview data
 type OSStruct struct {
-	BootMode        string `json:"boot_mode"`
-	BootVolume      string `json:"boot_volume"`
-	KernelVersion   string `json:"kernel_version"`
-	HostName        string `json:"local_host_name"`
-	Version         string `json:"os_version"`
-	SecureVM        string `json:"secure_vm"`
-	SystemIntegrity string `json:"system_integrity"`
-	Uptime          string `json:"uptime"`
-	Username        string `json:"user_name"`
+	BootMode        string `mapstructure:"boot_mode"`
+	BootVolume      string `mapstructure:"boot_volume"`
+	KernelVersion   string `mapstructure:"kernel_version"`
+	HostName        string `mapstructure:"local_host_name"`
+	Version         string `mapstructure:"os_version"`
+	SecureVM        string `mapstructure:"secure_vm"`
+	SystemIntegrity string `mapstructure:"system_integrity"`
+	Uptime          string `mapstructure:"uptime"`
+	Username        string `mapstructure:"user_name"`
 }
 
 //ApplicationsStruct infor about installed Apps
 type ApplicationsStruct struct {
-	Name         string   `json:"_name"`
-	ArchKind     string   `json:"arch_kind"`
-	LastModified string   `json:"lastModified"`
-	ObtainedFrom string   `json:"obtained_from"`
-	Path         string   `json:"path"`
-	Version      string   `json:"version"`
-	SignedBy     []string `json:"signed_by"`
+	Name         string   `mapstructure:"_name"`
+	ArchKind     string   `mapstructure:"arch_kind"`
+	LastModified string   `mapstructure:"lastModified"`
+	ObtainedFrom string   `mapstructure:"obtained_from"`
+	Path         string   `mapstructure:"path"`
+	Version      string   `mapstructure:"version"`
+	SignedBy     []string `mapstructure:"signed_by"`
 }
 
 //UpdateStruct Software Update list
@@ -88,10 +88,6 @@ type UpdateStruct struct {
 
 //MainStruct data about the whole system
 type MainStruct struct {
-	Hardware     []HardwareStruct     `json:"SPHardwareDataType"`
-	Displays     []DisplaysStruct     `json:"SPDisplaysDataType"`
-	Audio        []AudioStruct        `json:"SPAudioDataType"`
-	Memory       []MemoryStruct       `json:"SPMemoryDataType"`
-	OS           []OSStruct           `json:"SPSoftwareDataType"`
-	Applications []ApplicationsStruct `json:"SPApplicationsDataType"`
+	DataType string        `plist:"_dataType"`
+	Items    []interface{} `plist:"_items"`
 }
