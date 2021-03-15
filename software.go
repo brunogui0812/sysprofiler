@@ -7,7 +7,6 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/mitchellh/mapstructure"
 	"github.com/spakin/awk"
 )
 
@@ -20,50 +19,24 @@ const (
 
 //OS get operating system overview data
 func OS() ([]OSStruct, error) {
-	var data []MainStruct
-	var osData []OSStruct
+	var data MainStruct
 	var err error
 	if data, err = Exec(OSDT); err != nil {
 		return nil, err
 	}
 
-	for _, dataItem := range data {
-		if dataItem.DataType == OSDT {
-			for _, item := range dataItem.Items {
-				var decoded OSStruct
-				if err := mapstructure.Decode(item, &decoded); err != nil {
-					return nil, err
-				}
-				osData = append(osData, decoded)
-			}
-		}
-	}
-
-	return osData, nil
+	return data.OS, nil
 }
 
 //Applications get installed apps on the system
 func Applications() ([]ApplicationsStruct, error) {
-	var data []MainStruct
-	var appData []ApplicationsStruct
+	var data MainStruct
 	var err error
 	if data, err = Exec(ApplicationsDT); err != nil {
 		return nil, err
 	}
 
-	for _, dataItem := range data {
-		if dataItem.DataType == ApplicationsDT {
-			for _, item := range dataItem.Items {
-				var decoded ApplicationsStruct
-				if err := mapstructure.Decode(item, &decoded); err != nil {
-					return nil, err
-				}
-				appData = append(appData, decoded)
-			}
-		}
-	}
-
-	return appData, nil
+	return data.Applications, nil
 }
 
 //Updates get software updates available

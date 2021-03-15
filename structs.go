@@ -88,8 +88,18 @@ type UpdateStruct struct {
 	Action      string `json:"action"`
 }
 
-//MainStruct data about the whole system
-type MainStruct struct {
+//RawStruct data about the whole system
+type RawStruct struct {
 	DataType string        `plist:"_dataType"`
 	Items    []interface{} `plist:"_items"`
+}
+
+//MainStruct data about the whole system
+type MainStruct struct {
+	Hardware     []HardwareStruct     `json:"SPHardwareDataType"`
+	Displays     []DisplaysStruct     `json:"SPDisplaysDataType"`
+	Audio        []AudioStruct        `json:"SPAudioDataType"`
+	Memory       []MemoryStruct       `json:"SPMemoryDataType"`
+	OS           []OSStruct           `json:"SPSoftwareDataType"`
+	Applications []ApplicationsStruct `json:"SPApplicationsDataType"`
 }
