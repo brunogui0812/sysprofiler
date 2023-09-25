@@ -7,8 +7,8 @@ type HardwareStruct struct {
 	BootRomVersion string `mapstructure:"boot_rom_version"`
 	CPUType        string `mapstructure:"cpu_type"`
 	CPUSpeed       string `mapstructure:"current_processor_speed"`
-	CPUCores       int    `mapstructure:"number_processors"`
-	CPUNumber      int    `mapstructure:"packages"`
+	CPUCores       string `mapstructure:"number_processors"`
+	CPUNumber      string `mapstructure:"packages"`
 	L2CacheCore    string `mapstructure:"l2_cache_core"`
 	L3Cache        string `mapstructure:"l3_cache"`
 	MachineModel   string `mapstructure:"machine_model"`
