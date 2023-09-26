@@ -9,6 +9,7 @@ type HardwareStruct struct {
 	CPUSpeed       string `mapstructure:"current_processor_speed"`
 	CPUCores       string `mapstructure:"number_processors"`
 	CPUNumber      string `mapstructure:"packages"`
+	ChipType       string `mapstructure:"chip_type"`
 	L2CacheCore    string `mapstructure:"l2_cache_core"`
 	L3Cache        string `mapstructure:"l3_cache"`
 	MachineModel   string `mapstructure:"machine_model"`
